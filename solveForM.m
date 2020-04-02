@@ -1,6 +1,9 @@
 clear; close all
 
 load("x2dThwaites.mat",'x2dThwaites','y2dThwaites','BasalDragThwaites');
+load elementconnectivity.mat
+load FricCoef2d.mat
+t = connectivity;
 uB = scatteredInterpolant(x2dThwaites,y2dThwaites,BasalDragThwaites);
 %% clear out 0s
 x2dThwaites = x2dThwaites(BasalDragThwaites~=0);
@@ -10,6 +13,9 @@ spd = measures_interp('speed',x2dThwaites,y2dThwaites);
 
 
 %% Plot the field, do some stuff
+figure
+triplot(t,x2dThwaites,y2dThwaites)
+
 figure(1)
 subplot(231)
 scatter(x2dThwaites,y2dThwaites,[],BasalDragThwaites,'filled')
