@@ -1,12 +1,13 @@
 %%  Messing around to see if this even makes sense
 clear
 %% Make m ~ 3 data
-m = 1.5;
+m = 3;
 a = 10;
+n = 1000;
 
-u = abs(logspace(0,3.5,1000)' +  10*randn(1000,1)); 
-a_noise = a + 1*randn(1000,1);
-m_noise = m + .2*randn(1000,1);
+u = abs(logspace(0,3.5,n)' +  10*randn(n,1)); 
+a_noise = a + 1*randn(n,1);
+m_noise = m + .2*randn(n,1);
 tau = a_noise.*u.^(1./m_noise);
 
 figure(1)
@@ -38,8 +39,9 @@ x = G\b;
 
 m_fit = (-x(1)+1)^(-1);
 a_fit = exp(-x(2));
+res = G*x - b;
 
-disp("m fit to: " + m_fit + " with \alpha_m: " + a_fit);
+disp("m fit to: " + m_fit + " with \alpha_m: " + a_fit + ". Residual: " + norm(res)/n);
 subplot(212)
 scatter(u,tau,[],'.')
 xlabel('speed')
