@@ -3,7 +3,7 @@ clear
 %% Make m ~ 3 data
 m = 3;
 a = 10;
-n = 1000
+n = 1000;
 
 u = abs(logspace(0,3.5,n)' +  10*randn(n,1)); 
 a_noise = a + 1*randn(n,1);
